@@ -1,11 +1,11 @@
-package io.camunda.tasklist.auth;
+package io.camunda.operate.auth;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import io.camunda.tasklist.TaskListRestClient;
-import io.camunda.tasklist.dto.AccessTokenRequest;
-import io.camunda.tasklist.dto.AccessTokenResponse;
-import io.camunda.tasklist.exception.TaskListException;
-import io.camunda.tasklist.json.JsonUtils;
+import io.camunda.operate.OperateRestClient;
+import io.camunda.operate.dto.AccessTokenRequest;
+import io.camunda.operate.dto.AccessTokenResponse;
+import io.camunda.operate.exception.OperateException;
+import io.camunda.operate.json.JsonUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -39,11 +39,11 @@ public class JWTAuthentication implements Authentication {
   HttpClient client;
 
   public JWTAuthentication(
-      @Value("${tasklist.client.authorizationUrl:'tasklist.camunda.io'}") String authorizationServerUrl,
-      @Value("${tasklist.client.clientId:'tasklist'}") String clientId,
-      @Value("${tasklist.client.clientSecret}") String clientSecret,
-      @Value("${tasklist.client.contentType:'application/x-www-form-urlencoded'}") String contentType,
-      @Value("${tasklist.client.audience:'tasklist.camunda.io'}") String audience
+      @Value("${operate.client.authorizationUrl:'https://login.cloud.camunda.io/oauth/token'}") String authorizationServerUrl,
+      @Value("${operate.client.clientId:'operate'}") String clientId,
+      @Value("${operate.client.clientSecret}") String clientSecret,
+      @Value("${operate.client.contentType:'application/x-www-form-urlencoded'}") String contentType,
+      @Value("${operate.client.audience:'operate.camunda.io'}") String audience
   ) {
 
     this.authorizationServerUrl = authorizationServerUrl;
@@ -59,7 +59,7 @@ public class JWTAuthentication implements Authentication {
   }
 
   @Override
-  public Boolean authenticate(TaskListRestClient taskListClient) throws TaskListException {
+  public Boolean authenticate(OperateRestClient operateRestClient) throws OperateException {
 
     try {
 
@@ -85,7 +85,7 @@ public class JWTAuthentication implements Authentication {
             .collect(Collectors.joining("&"));
 
       } else {
-        throw new TaskListException("Content type must either be `json` or `x-www-form-urlencoded`");
+        throw new OperateException("Content type must either be `json` or `x-www-form-urlencoded`");
       }
 
       HttpRequest request = HttpRequest.newBuilder()
@@ -98,15 +98,15 @@ public class JWTAuthentication implements Authentication {
       HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
       JsonUtils<AccessTokenResponse> jsonUtils = new JsonUtils<>(AccessTokenResponse.class);
       AccessTokenResponse accessTokenResponse = jsonUtils.fromJson(response.body());
-      taskListClient.setAccessTokenResponse(accessTokenResponse);
+      operateRestClient.setAccessTokenResponse(accessTokenResponse);
       return true;
 
     } catch (URISyntaxException e) {
-      throw new TaskListException("Authorization Server URL must be a valid URI", e);
+      throw new OperateException("Authorization Server URL must be a valid URI", e);
     } catch (JsonProcessingException e) {
-      throw new TaskListException("Unable to serialize AccessTokenRequest to json", e);
+      throw new OperateException("Unable to serialize AccessTokenRequest to json", e);
     } catch (IOException | InterruptedException e) {
-      throw new TaskListException("Unable to send Access Token Request", e);
+      throw new OperateException("Unable to send Access Token Request", e);
     }
 
   }

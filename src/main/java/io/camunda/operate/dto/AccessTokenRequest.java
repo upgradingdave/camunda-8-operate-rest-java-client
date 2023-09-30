@@ -1,4 +1,4 @@
-package io.camunda.tasklist.dto;
+package io.camunda.operate.dto;
 
 public class AccessTokenRequest {
 

@@ -1,0 +1,4 @@
+- Remove hard coded bpmnProcessId from unit tests
+- Move auth and json package into separate project
+- Move get, post, patch into separate project
+- Use Connectors HTTP client?

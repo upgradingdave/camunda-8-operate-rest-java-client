@@ -1,10 +1,11 @@
-package io.camunda.tasklist.dto;
+package io.camunda.operate.dto;
 
 public class ErrorResponse {
 
   Integer status;
   String message;
   String instance;
+  String type;
 
   public ErrorResponse() {
   }
@@ -31,5 +32,13 @@ public class ErrorResponse {
 
   public void setInstance(String instance) {
     this.instance = instance;
+  }
+
+  public String getType() {
+    return type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
   }
 }

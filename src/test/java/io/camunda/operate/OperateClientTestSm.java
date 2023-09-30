@@ -1,4 +1,4 @@
-package io.camunda.tasklist;
+package io.camunda.operate;
 
 import io.camunda.zeebe.spring.client.annotation.Deployment;
 import org.junit.jupiter.api.TestInstance;
@@ -10,12 +10,12 @@ import org.springframework.test.context.ActiveProfiles;
 @SpringBootTest
 @ActiveProfiles("sm")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class TaskListClientTestSm extends TaskListClientTest {
+public class OperateClientTestSm extends OperateClientTest {
   @SpringBootApplication
   @Deployment(resources = "classpath:/bpmn/tasklistRestAPIUnitTestProcess.bpmn")
-  public static class TaskListClientTestApp {
+  public static class OperateClientTestApp {
     public static void main(String[] args) {
-      SpringApplication.run(TaskListClientTestApp.class, args);
+      SpringApplication.run(OperateClientTestApp.class, args);
     }
   }
 }
