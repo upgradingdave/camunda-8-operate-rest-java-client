@@ -106,6 +106,7 @@ public abstract class OperateClientTest {
     ProcessDefinitionQueryResults results = findLatestDefinition("tasklistRestAPIUnitTestProcess");
     assertNotNull(results);
     assertEquals(results.getItems().get(0).getBpmnProcessId(), "tasklistRestAPIUnitTestProcess");
+    System.out.println("ProcessDefinitionKey: " + results.getItems().get(0).getKey());
   }
 
 }
