@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Component
-public class JWTAuthentication implements Authentication {
+public class OperateJWTAuthentication {
 
   final public static String CLIENT_CREDENTIALS = "client_credentials";
 
@@ -38,7 +38,7 @@ public class JWTAuthentication implements Authentication {
 
   HttpClient client;
 
-  public JWTAuthentication(
+  public OperateJWTAuthentication(
       @Value("${operate.client.authorizationUrl:'https://login.cloud.camunda.io/oauth/token'}") String authorizationServerUrl,
       @Value("${operate.client.clientId:'operate'}") String clientId,
       @Value("${operate.client.clientSecret}") String clientSecret,
@@ -58,7 +58,6 @@ public class JWTAuthentication implements Authentication {
         .build();
   }
 
-  @Override
   public Boolean authenticate(OperateRestClient operateRestClient) throws OperateException {
 
     try {

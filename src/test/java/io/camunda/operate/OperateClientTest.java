@@ -3,7 +3,7 @@ package io.camunda.operate;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.camunda.operate.rest.OperateRestClient;
 import io.camunda.operate.rest.dto.AccessTokenRequest;
-import io.camunda.operate.rest.auth.JWTAuthentication;
+import io.camunda.operate.rest.auth.OperateJWTAuthentication;
 import io.camunda.operate.rest.exception.OperateException;
 import io.camunda.operate.rest.exception.OperateRestException;
 import io.camunda.operate.rest.dto.*;
@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public abstract class OperateClientTest {
 
   @Autowired
-  JWTAuthentication jwtAuthentication;
+  OperateJWTAuthentication operateJwtAuthentication;
   @Autowired
   OperateRestClient operateRestClient;
   @Autowired
@@ -82,7 +82,7 @@ public abstract class OperateClientTest {
 
   @Test
   void authenticationTest() throws OperateException {
-    assertTrue(jwtAuthentication.authenticate(operateRestClient));
+    assertTrue(operateJwtAuthentication.authenticate(operateRestClient));
   }
 
   @Test

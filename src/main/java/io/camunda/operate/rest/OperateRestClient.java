@@ -1,7 +1,7 @@
 package io.camunda.operate.rest;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import io.camunda.operate.rest.auth.Authentication;
+import io.camunda.operate.rest.auth.OperateJWTAuthentication;
 import io.camunda.operate.rest.exception.OperateException;
 import io.camunda.operate.rest.exception.OperateRestException;
 import io.camunda.operate.rest.dto.AccessTokenResponse;
@@ -25,14 +25,14 @@ import java.time.Duration;
 @Component
 public class OperateRestClient {
 
-  Authentication authentication;
+  OperateJWTAuthentication authentication;
   AccessTokenResponse accessTokenResponse;
   String operateBaseUrl;
 
   private final HttpClient httpClient;
 
   public OperateRestClient(
-      @Autowired @Qualifier("OperateRestAuthentication") Authentication authentication,
+      @Autowired OperateJWTAuthentication authentication,
       @Value("${operate.client.operateBaseUrl}") String operateBaseUrl) {
     this.authentication = authentication;
     httpClient = HttpClient.newBuilder()
@@ -43,11 +43,11 @@ public class OperateRestClient {
     this.operateBaseUrl = operateBaseUrl;
   }
 
-  public Authentication getAuthentication() {
+  public OperateJWTAuthentication getAuthentication() {
     return authentication;
   }
 
-  public void setAuthentication(Authentication authentication) {
+  public void setAuthentication(OperateJWTAuthentication authentication) {
     this.authentication = authentication;
   }
 
