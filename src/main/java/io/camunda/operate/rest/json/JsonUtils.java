@@ -1,4 +1,4 @@
-package io.camunda.operate.json;
+package io.camunda.operate.rest.json;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;

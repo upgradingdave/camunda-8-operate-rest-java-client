@@ -1,6 +1,6 @@
-package io.camunda.operate.exception;
+package io.camunda.operate.rest.exception;
 
-import io.camunda.operate.dto.ErrorResponse;
+import io.camunda.operate.rest.dto.ErrorResponse;
 
 public class OperateRestException extends Exception {
 

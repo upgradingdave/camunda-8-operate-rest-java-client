@@ -1,4 +1,4 @@
-package io.camunda.operate.exception;
+package io.camunda.operate.rest.exception;
 
 public class OperateException extends Exception {
 

@@ -1,11 +1,11 @@
-package io.camunda.operate.auth;
+package io.camunda.operate.rest.auth;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import io.camunda.operate.OperateRestClient;
-import io.camunda.operate.dto.AccessTokenRequest;
-import io.camunda.operate.dto.AccessTokenResponse;
-import io.camunda.operate.exception.OperateException;
-import io.camunda.operate.json.JsonUtils;
+import io.camunda.operate.rest.OperateRestClient;
+import io.camunda.operate.rest.dto.AccessTokenRequest;
+import io.camunda.operate.rest.dto.AccessTokenResponse;
+import io.camunda.operate.rest.exception.OperateException;
+import io.camunda.operate.rest.json.JsonUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 

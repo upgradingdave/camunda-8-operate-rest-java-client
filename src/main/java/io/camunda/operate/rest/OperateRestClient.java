@@ -1,12 +1,16 @@
-package io.camunda.operate;
+package io.camunda.operate.rest;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import io.camunda.operate.auth.Authentication;
-import io.camunda.operate.dto.*;
-import io.camunda.operate.exception.OperateException;
-import io.camunda.operate.exception.OperateRestException;
-import io.camunda.operate.json.JsonUtils;
+import io.camunda.operate.rest.auth.Authentication;
+import io.camunda.operate.rest.exception.OperateException;
+import io.camunda.operate.rest.exception.OperateRestException;
+import io.camunda.operate.rest.dto.AccessTokenResponse;
+import io.camunda.operate.rest.dto.ErrorResponse;
+import io.camunda.operate.rest.dto.ProcessDefinitionQuery;
+import io.camunda.operate.rest.dto.ProcessDefinitionQueryResults;
+import io.camunda.operate.rest.json.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -28,7 +32,7 @@ public class OperateRestClient {
   private final HttpClient httpClient;
 
   public OperateRestClient(
-      @Autowired Authentication authentication,
+      @Autowired @Qualifier("OperateRestAuthentication") Authentication authentication,
       @Value("${operate.client.operateBaseUrl}") String operateBaseUrl) {
     this.authentication = authentication;
     httpClient = HttpClient.newBuilder()

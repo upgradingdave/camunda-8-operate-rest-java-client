@@ -1,4 +1,4 @@
-package io.camunda.operate.dto;
+package io.camunda.operate.rest.dto;
 
 public class QuerySort {
 

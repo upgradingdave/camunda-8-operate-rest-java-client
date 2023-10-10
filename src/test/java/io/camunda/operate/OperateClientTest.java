@@ -1,11 +1,14 @@
 package io.camunda.operate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import io.camunda.operate.auth.JWTAuthentication;
-import io.camunda.operate.dto.*;
-import io.camunda.operate.exception.OperateException;
-import io.camunda.operate.exception.OperateRestException;
-import io.camunda.operate.json.JsonUtils;
+import io.camunda.operate.rest.OperateRestClient;
+import io.camunda.operate.rest.dto.AccessTokenRequest;
+import io.camunda.operate.rest.auth.JWTAuthentication;
+import io.camunda.operate.rest.exception.OperateException;
+import io.camunda.operate.rest.exception.OperateRestException;
+import io.camunda.operate.rest.dto.*;
+import io.camunda.operate.rest.dto.ProcessDefinition;
+import io.camunda.operate.rest.json.JsonUtils;
 import io.camunda.zeebe.client.ZeebeClient;
 import io.camunda.zeebe.client.api.response.ProcessInstanceEvent;
 import io.camunda.zeebe.client.api.response.Topology;
@@ -47,7 +50,7 @@ public abstract class OperateClientTest {
   public ProcessDefinitionQueryResults findLatestDefinition(String bpmnProcessId) throws OperateException, OperateRestException {
 
     // filter so we only get definitions for a given bpmnProcessId
-    ProcessDefinition processDefinition = new ProcessDefinition();
+    io.camunda.operate.rest.dto.ProcessDefinition processDefinition = new ProcessDefinition();
     processDefinition.setBpmnProcessId(bpmnProcessId);
 
     // sort by version ASC so we get the latest version
